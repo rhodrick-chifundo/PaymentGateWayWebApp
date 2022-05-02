@@ -1,14 +1,17 @@
 .bdy{
     background:powderblue;
 }
+
+
+
 .container{
 background: white;
 position: relative;
 width: 54%;
 height: 50%;
 border: 1px solid green;
-margin-left: 400px;
-margin-top: 10px
+margin-left: 25%;
+margin-top: 6%;
 
 
 }
@@ -18,8 +21,8 @@ position: relative;
 width: 54%;
 height: 50%;
 border: 1px solid green;
-margin-left: 400px;
-margin-top: 20px
+margin-left: 25%;
+margin-top: 5%;
 
 }
 
@@ -27,41 +30,43 @@ margin-top: 20px
 background: white;
 position: relative;
 width: 54%;
-height: 30%;
+height: 20%;
 border: 1px solid green;
-margin-left: 400px;
-margin-top: 3px
-
-}
-.hwater{
-margin-left: 40%;
-margin-bottom: 1%
-}
-.mhc{
-margin-left: 30%;
+margin-left: 25%;
 margin-top: 1%;
 
 }
+.hwater{
+margin-left: 45%;
+color: green;
+margin-bottom: 1%;
+}
+.mhc{
+margin-left: 33%;
+color: green;
+margin-top: 23%;
+
+}
 .masm1{
-margin-left: 450px;
-margin-top: 1%
+    margin-left: 4%;
+margin-top: 1%;
 
 }
 .masa{
     margin-bottom: 2%;
-    margin-left: 350px;
+    margin-left: 1%;
     width: 22%;
-    height: 30%
+    height: 30%;
     
 
 }
 .wota{
-margin-left: 400px;
+margin-left: 4%;
 width: 16%;
-height: 16%
+height: 16%;
 }
 .housing{
-margin-left: 42%;
+margin-left: 4%;
 width: 16%;
 height: 16%;
 }
@@ -69,14 +74,14 @@ height: 16%;
 .pay1{
 height: 32px;
 width: 14%;
-margin-left: 450px;
+margin-left: 45%;
 background: rgb(50, 168, 35);
 margin-bottom: 50%;
 }
 .pay2{
 height: 32px;
 width: 14%;
-margin-left: 450px;
+margin-left: 54%;
 background: rgb(50, 168, 35);
 margin-top: 10px;
 }
@@ -84,13 +89,42 @@ margin-top: 10px;
 background: rgb(50, 168, 35);
 height: 32px;
 width: 14%;
-margin-left: 450px;
-margin-top:26px    
+margin-left: 54%;
+margin-top:2%;   
 }
-.payit{
-    margin-top: -1%;
-margin-left: 650px;
+
+
+
+
+.navbar {
+    
+    margin-top: 0;
+    background: rgb(50, 50, 150);
+    padding: 0%;
+    height: 50px;
+    padding: -30%;
+   
 }
-.payit2{
-margin-left: 650px;
+.clearfix{ padding-top: -30%;
+}
+.p{
+    color: gold;
+}
+.foot{color: black; }
+.reffnum{
+    margin-left: 45%;
+    margin-top:-16%;  
+}
+.refName{
+    margin-left: 3%;
+    margin-top:-16%;  
+}
+#checkbill{
+    margin-left: 20%;
+}
+.parg2{
+    margin-left: 50%;
+}
+.parg1{
+    margin-left: 40%;
 }

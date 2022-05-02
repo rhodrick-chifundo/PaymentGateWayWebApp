@@ -3,22 +3,56 @@
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>paying for malawi housing corperation</title>
-        <p id="mane"> Enter amount in us dollars</p>
-        <input type="number" id="amount" name="fname"><br><br>
+
+        <p id="mane1"> first you must enter reference number to check your bill before you can pay</p><br>
+        <label  for="refName1" id="reff1">Enter reference number </label><br>
+        <input type="number" id="refnumber2" name="fname"><br><br>
+
+        <input type="number" id="retiv" name="fname">
+        <label  for="refName1" id="reff2">your bill is </label><br><br>
+        <button id="clear0" > CHECK BILL</button>
+
+        <p id="reti"> pay your bill with paypal  and then click clear bill button </p><br><br>
+
+        <p id="mane"> Enter amount in multiples of 10 but check your bill first</p>
+        <title>paying for housing</title>
+        
+        <input type="number" id="amount2" name="fname" disabled><br><br><br>
       </head>
 
       <body id = "body1">
+          
         <div id="paypal-button-container"></div>
+        <!--<button id="clear1" disabled> CLEAR BILL</button>-->
+
         <!-- Sample PayPal credentials (client-id) are included -->
         <script src="https://www.paypal.com/sdk/js?client-id=AVh65e2s1Gc-LuKlCO-CkLXutEI_qczvSR8AcKanNsO9g2ayfo5iG1K-eyNKRJYzRGlOu57czUNGCqRx"></script>
-        <script>
-            const amountElement = document.getElementById("amount")
+        <script type="module">
+            const amountElement = document.getElementById("amount2")
+            const pay1 = amountElement;
+                                 // connect to firebase database
+                                import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+                                import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+
+                                const firebaseConfig = {
+                        apiKey: "AIzaSyA9UQZ5ve86sUE-sJ729GH7YpPBYDMN_ak",
+                        authDomain: "payit-project-a3c21.firebaseapp.com",
+                    projectId: "payit-project-a3c21",
+                    storageBucket: "payit-project-a3c21.appspot.com",
+                        messagingSenderId: "533569923701",
+                        appId: "1:533569923701:web:1fafc6bfaf68fb0b44663c"
+                    };
+
+
+                        const app = initializeApp(firebaseConfig);
+                        const database = getDatabase(app);
+
+
+            
           const paypalButtonsComponent = paypal.Buttons({
               // optional styling for buttons
               // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
               style: {
-                  
                 color: "blue",
                 shape: "rect",
                 layout: "vertical"
@@ -32,7 +66,7 @@
                       purchase_units: [
                           {
                               amount: {
-                                  value: amountElement.value
+                                  value: pay1.value/1000,
                               }
                           }
                       ]
@@ -45,8 +79,25 @@
               onApprove: (data, actions) => {
                   const captureOrderHandler = (details) => {
                       const payerName = details.payer.name.given_name;
-                      alert('Hie' +' '+ payerName + ' you have successfully payed' +' '+'MWK' + amountElement.value*850 + ' to malawi housing corperation');
+                      alert('Hie' +' '+ payerName + ' you have successfully payed' +' ' +'MWK'+ amountElement.value + ' to waterboard. You must click CLEAR BILL button to clear your bill', );
                       console.log('Transaction completed');
+                                     // update customers bill
+                                            var reference = document.getElementById('refnumber2').value;
+                                            var bill2 = document.getElementById('amount2').value;
+                                            var bil = document.getElementById('retiv').value;
+                                            var paypal = Number(bill2) - Number(bill2)*0.029
+                                            var sum =  Number(bil)-Number(paypal) //+Number(bill2)*0.029 )
+                                            update(ref(database, 'MALAWI HOUSING CORPERATION/' + reference), {
+                                            referenceNumber: reference,
+                                            bill : sum
+                                            }).then(() => {
+                                            alert('Hie' +' '+ payerName + ' you have successfully payed' +' ' +'MWK'+ amountElement.value + ' to Malawi Housing Corperation ',)
+                                            })
+                                            .catch((error) => {
+                                            alert('fail to update')
+                                            });
+                                            // }); 
+
                   };
 
                   return actions.order.capture().then(captureOrderHandler);
@@ -54,7 +105,7 @@
 
               // handle unrecoverable errors
               onError: (err) => {
-                  console.error('An error prevented the buyer from checking out with PayPal');
+                  console.error('An error prevented the buyer from checking out with PayPal take note');
               }
           });
 
@@ -63,27 +114,96 @@
               .catch((err) => {
                   console.error('PayPal Buttons failed to render');
               });
+
+             
+
+
+// customer can check bill
+clear0.addEventListener('click', (e) =>{
+            var input1 = document.getElementById('amount2');
+            input1.disabled = false;
+
+
+
+    var reference = document.getElementById('refnumber2').value;
+    var bill0 = document.getElementById('retiv').value;
+    
+
+const starCountRef = ref(database, 'MALAWI HOUSING CORPERATION/' + reference);
+onValue(starCountRef, (snapshot) => {
+ const data = snapshot.val();
+document.getElementById('retiv').value = snapshot.val().bill;
+
+  
+});
+});
+
+ 
+
+
+
         </script>
 
-<style>
-        #amount{
-            margin-top: 1px;
-            margin-left: 800px;
-            width: 250px;
-            height: 30px;
+      <style>
+      #amount2{
+        margin-left: 40%;
+        margin-bottom: -3%;
+
+          width: 250px;
+          height: 30px;
+      }
+      #retiv{
+        margin-left: 40%;
+          width: 250px;
+          height: 30px;
+      }
+      #reti{
+        margin-left: 40%;
+        margin-bottom: 2%;
+          
+      }
+      #reff1{
+        margin-left: 40%;
+          width: 250px;
+          height: 11px;
+      }
+      #reff2{
+        margin-left: -25%;
+          width: 250px;
+          height: 11px;
+      }
+      #refnumber2{
+        margin-left: 40%;
+          width: 250px;
+          height: 30px;
+      }
+      #mane{
+            margin-left: 40%;
+            margin-top: -2%;
+
         }
-        #mane{
-            margin-top: 300px;
-            margin-left: 800px;
+        #mane1{
+          
+            margin-left: 40%;
         }
-        #paypal-button-container{
+      #paypal-button-container{
             text-align: center;
         }
         #body1{
             background: #DDD;
         }
+        #clear1{
+            margin-bottom: 0%;
+            margin-left: 47%;
+        }
+        #clear0{
+            margin-bottom: 0%;
+            margin-left: 47%;
+        }
+        
 
-        </style>
+      
+      </style>
       
 
       </body>
